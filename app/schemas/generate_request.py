@@ -23,3 +23,23 @@ class GenerateRequest(BaseModel):
     input_image: Optional[str] = None
     input_audio: Optional[str] = None
 
+    @model_validator(mode="after")
+    def validate_task_type(self):
+
+        if self.task_type == TaskType.REFERENCE_TO_VIDEO:
+            if not self.ref_imgs:
+                raise ValueError("ref_imgs is required for REFERENCE_TO_VIDEO task type")
+            
+        elif self.task_type == TaskType.SINGLE_SHOT_EXTENSION:
+            if not self.input_video:
+                raise ValueError("input_video is required for SINGLE_SHOT_EXTENSION task type")
+            
+        elif self.task_type == TaskType.SHOT_SWITCHING_EXTENSION:
+            if not self.input_video:
+                raise ValueError("input_video is required for SHOT_SWITCHING_EXTENSION task type")
+            
+        elif self.task_type == TaskType.TALKING_AVATAR:
+            if not self.input_audio or not self.input_image:
+                raise ValueError("input_audio and input_image are required for TALKING_AVATAR task type")
+            
+        return self
