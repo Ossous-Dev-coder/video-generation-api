@@ -1,5 +1,5 @@
 import uuid
-
+import time
 from datetime import datetime, timezone
 from app.models.Job import Job
 from app.schemas.Generate_request import GenerateRequest
@@ -40,6 +40,37 @@ class JobService:
             estimated_time_seconds=job.estimated_time_seconds,
             created_at=job.created_at
         )
+    
+    @staticmethod
+    def process_job(job_id: str): ## Simulating the processing of a job.
+
+        job = JobService._jobs.get(job_id)
+
+        if job is None:
+            return
+
+        time.sleep(10)
+
+        job.status = JobStatus.RUNNING
+        job.started_at = datetime.now(timezone.utc)
+
+        job.progress = 25
+
+        time.sleep(5)
+
+        job.progress = 50
+
+        time.sleep(5)
+
+        job.progress = 75
+
+        time.sleep(5)
+
+        job.progress = 100
+        job.status = JobStatus.COMPLETED
+        job.completed_at = datetime.now(timezone.utc)
+
+        job.output_url = (f"https://bucket.s3.amazonaws.com/output/{job.job_id}.mp4")
     
     @staticmethod
     def get_job(job_id: str) -> JobResponse | None:

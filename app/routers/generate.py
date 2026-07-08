@@ -1,24 +1,28 @@
 import uuid
-
 from fastapi import APIRouter, status
-
 from app.schemas.Generate_request import GenerateRequest
 from app.schemas.Generate_response import GenerateResponse
 from app.schemas.Upload_response import UploadResponse
 from app.schemas.Upload_response import UploadResponse
 from app.services.job_service import JobService
+from fastapi import BackgroundTasks
 
 router = APIRouter(tags=["Generate"])
-    
+
 @router.post("/api/generate", response_model=GenerateResponse,status_code=status.HTTP_201_CREATED)
-def generate(request: GenerateRequest):
-    return JobService.create_job(request)
+
+def generate(request: GenerateRequest, background_tasks: BackgroundTasks):
+    response = JobService.create_job(request)
+
+    background_tasks.add_task(JobService.process_job, response.job_id)
+
+    return response
 
 
 @router.get("/api/generate/signed-upload-url",response_model=UploadResponse)
 def get_signed_upload_url():
 
-    file_name = f"{uuid.uuid4()}.png"
+    file_name = f"{uuid.uuid4()}.png" ## Generate a unique file name
 
     public_url = (f"https://bucket.s3.amazonaws.com/uploads/user_123/{file_name}")
 
