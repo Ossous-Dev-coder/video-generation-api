@@ -7,9 +7,9 @@ from pydantic import model_validator
 class GenerateRequest(BaseModel):
 
     task_type: TaskType
+    ref_imgs: Optional[list[str]] = None
     prompt: str
     
-    ref_imgs: Optional[list[str]] = None
     duration: Optional[int] = 5
     resolution: Optional[str] = "720P"
     seed: Optional[int] = 42
