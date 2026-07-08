@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from app.routers.Generate import router
-from app.routers.Jobs import router as jobs_router
+from app.routers.jobs import router as jobs_router
 
 app = FastAPI()
 

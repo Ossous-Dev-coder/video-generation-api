@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException
 
 from app.schemas.Job_response import JobResponse
-from app.services.Job_service import JobService
+from app.services.job_service import JobService
 
 router = APIRouter(tags=["Jobs"])
 

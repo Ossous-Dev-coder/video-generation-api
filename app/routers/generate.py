@@ -2,7 +2,7 @@ from fastapi import APIRouter, status
 
 from app.schemas.Generate_request import GenerateRequest
 from app.schemas.Generate_response import GenerateResponse
-from app.services.Job_service import JobService
+from app.services.job_service import JobService
 
 router = APIRouter(tags=["Generate"])
     
