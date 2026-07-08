@@ -22,7 +22,7 @@ class JobService:
             duration=request.duration,
             resolution=request.resolution,
             seed=request.seed,
-            status=JobStatus.queued, ## Assuming the job is queued initially
+            status=JobStatus.QUEUED, ## Assuming the job is queued initially
             progress=0,
             estimated_time_seconds=300,
             created_at=datetime.now(timezone.utc),
