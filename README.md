@@ -24,7 +24,9 @@ A FastAPI backend implementation of the Video Generation API contract.
 
 ## Installation
 
-Clone the repository:
+Extract the zip file 
+or
+Clone the repository (Recommended):
 
 ```bash
 git clone https://github.com/Ossous-Dev-coder/video-generation-api.git
