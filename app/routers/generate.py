@@ -1,9 +1,9 @@
 import uuid
 from fastapi import APIRouter, status
-from app.schemas.Generate_request import GenerateRequest
-from app.schemas.Generate_response import GenerateResponse
-from app.schemas.Upload_response import UploadResponse
-from app.schemas.Upload_response import UploadResponse
+from app.schemas.generate_request import GenerateRequest
+from app.schemas.generate_response import GenerateResponse
+from app.schemas.upload_response import UploadResponse
+from app.schemas.upload_response import UploadResponse
 from app.services.job_service import JobService
 from fastapi import BackgroundTasks
 

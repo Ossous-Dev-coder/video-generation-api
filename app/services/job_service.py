@@ -2,10 +2,10 @@ import uuid
 import time
 from datetime import datetime, timezone
 from app.models.Job import Job
-from app.schemas.Generate_request import GenerateRequest
-from app.schemas.Generate_response import GenerateResponse
+from app.schemas.generate_request import GenerateRequest
+from app.schemas.generate_response import GenerateResponse
 from app.enums.job_status import JobStatus
-from app.schemas.Job_response import JobResponse
+from app.schemas.job_response import JobResponse
 from app.schemas.webhook_request import WebhookRequest
 
 
