@@ -32,6 +32,9 @@ class GenerateRequest(BaseModel):
 
     def validate_request(self):
 
+        if not self.prompt or self.prompt.strip() == "":
+            raise ValueError("Prompt cannot be empty.")
+
         if self.task_type == TaskType.REFERENCE_TO_VIDEO:
 
             self.validate_reference_to_video()
