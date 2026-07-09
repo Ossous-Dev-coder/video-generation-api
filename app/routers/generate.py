@@ -14,6 +14,7 @@ router = APIRouter(tags=["Generate"])
 def generate(request: GenerateRequest, background_tasks: BackgroundTasks):
     response = JobService.create_job(request)
 
+    ## Comment out this to try out the webhook functionality.
     background_tasks.add_task(JobService.process_job, response.job_id)
 
     return response

@@ -6,6 +6,7 @@ from app.schemas.Generate_request import GenerateRequest
 from app.schemas.Generate_response import GenerateResponse
 from app.enums.job_status import JobStatus
 from app.schemas.Job_response import JobResponse
+from app.schemas.webhook_request import WebhookRequest
 
 
 class JobService:
@@ -72,6 +73,30 @@ class JobService:
 
         job.output_url = (f"https://bucket.s3.amazonaws.com/output/{job.job_id}.mp4")
     
+    @staticmethod
+    def complete_job(request: WebhookRequest):
+
+        job = JobService._jobs.get(request.job_id)
+    
+        if job is None:
+            return False
+    
+        job.status = request.status
+    
+        job.completed_at = datetime.now(timezone.utc)
+    
+        if request.status == JobStatus.COMPLETED:
+        
+            job.progress = 100
+    
+            job.output_url = request.output_url
+    
+        elif request.status == JobStatus.FAILED:
+        
+            job.error_message = request.error_message
+    
+        return True
+
     @staticmethod
     def get_job(job_id: str) -> JobResponse | None:
 
