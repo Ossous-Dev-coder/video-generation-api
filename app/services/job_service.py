@@ -1,7 +1,7 @@
 import uuid
 import time
 from datetime import datetime, timezone
-from app.models.Job import Job
+from app.models.job import Job
 from app.schemas.generate_request import GenerateRequest
 from app.schemas.generate_response import GenerateResponse
 from app.enums.job_status import JobStatus
